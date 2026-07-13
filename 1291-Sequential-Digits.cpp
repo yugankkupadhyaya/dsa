@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> sequentialDigits(int low, int high) {
+        vector<int> ans;
+
+        // Length of the number
+        for (int len = 2; len <= 9; len++) {
+
+            // Starting digit
+            for (int start = 1; start <= 10 - len; start++) {
+
+                int num = 0;
+
+                // Build the sequential number
+                for (int d = start; d < start + len; d++) {
+                    num = num * 10 + d;
+                }
+
+                if (num >= low && num <= high)
+                    ans.push_back(num);
+            }
+        }
+
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
+};
