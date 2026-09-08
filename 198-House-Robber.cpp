@@ -1,24 +1,21 @@
 class Solution {
 public:
     int n;
-
-   int solve( int idx, vector<int>& nums, vector<int>& dp) {
-        if (idx >= n) {
+    int solve(int idx, vector<int>& dp,vector<int>& nums) {
+        if (idx >= n)
             return 0;
-        }
         if (dp[idx] != -1)
             return dp[idx];
+        int nottake = solve(idx + 1, dp,nums) + 0;
+        int take = solve(idx + 2,dp,nums) + nums[idx];
 
-        int take =nums[idx] +solve(idx + 2, nums, dp);
-        int nottake = solve(idx + 1, nums, dp);
-        return dp[idx]=max(take,nottake);
+        return dp[idx] = max(take, nottake);
     }
 
     int rob(vector<int>& nums) {
-         n = nums.size();
+        n = nums.size();
 
-        vector<int> dp(n, -1);
-         solve(0,nums,dp);
-         return dp[0];
+        vector<int> dp(n + 1, -1);
+        return solve(0, dp,nums);
     }
 };
